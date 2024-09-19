@@ -30,7 +30,7 @@ public tagInput!: ElementRef<HTMLInputElement>;
  // searchTag ( newTag:string ) {
   searchTag ( ) {
 
-    const newTag = this.tagInput.nativeElement.value
+    const newTag = this.tagInput.nativeElement.value;
 
     this.gifsService.searchTag ( newTag );
 
