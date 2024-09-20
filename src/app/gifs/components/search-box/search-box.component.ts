@@ -1,7 +1,7 @@
 
 
 
-import { Component, ElementRef, ViewChild, viewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, } from '@angular/core';
 import { log } from 'node:console';
 import { GifsService } from '../../services/gifs.service';
 
