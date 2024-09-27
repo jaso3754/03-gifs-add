@@ -12,7 +12,7 @@ import { GifsService } from '../../services/gifs.service';
   <input type="text"
   class="form-control"
   placeholder="Buscar gifs...."
-  (keyup.enter)="searchTag (  )"
+  (keyup.enter)="searchTag ( )"
   #txtTagInput
   >
 
