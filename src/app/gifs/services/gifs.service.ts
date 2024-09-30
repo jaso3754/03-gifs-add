@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Gif, SearchResponse } from '../interfaces/gifs.interfaces';
+import { Locals } from 'express';
 
 @Injectable({ providedIn: 'root' })
-export class GifsService {
+export class GifsService implements OnInit {
 
   public gifList: Gif[] = [];
 
@@ -12,8 +13,12 @@ export class GifsService {
   private serviceUrl:   string = 'https://api.giphy.com/v1/gifs';
 
   constructor( private http: HttpClient) {
-    this.loadLocalStorage();
+
     console.log('Gifs service ready');
+  }
+
+  ngOnInit(): void {
+    this.loadLocalStorage();
   }
 
   get tagsHistory() {
