@@ -8,7 +8,7 @@ export class GifsService {
   public gifList: Gif[] = [];
 
   private _tagsHistory: string[] = [];
-  private apiKey:       string = 'FJTf1xHmJ1nOcuF3tbUSa7FXKDn6205R';
+  private apiKey:       string = 'QUEiqa73SilumZ8X2Jbl0YOi4Q4S1Rny';
   private serviceUrl:   string = 'https://api.giphy.com/v1/gifs';
 
   constructor( private http: HttpClient) {
@@ -64,7 +64,7 @@ export class GifsService {
 
 
         this.gifList = resp.data;
-        console.log({ gifs: this.gifList});
+        // console.log({ gifs: this.gifList});
 
       });
 
