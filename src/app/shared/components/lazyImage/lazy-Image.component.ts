@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { log } from 'console';
+
 
 @Component({
   selector: 'shared-lazy-image',
-  templateUrl:'./lazyImage.component.html',
+  templateUrl:'./lazy-Image.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LazyImageComponent implements OnInit {
