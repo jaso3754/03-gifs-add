@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { log } from 'console';
 
 @Component({
   selector: 'shared-lazy-image',
@@ -8,18 +9,26 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 })
 export class LazyImageComponent implements OnInit {
 
-@Input()
-  public url?:string;
+  @Input()
+    public url?:string;
 
 
-@Input()
-public alt: string = '';
+  @Input()
+  public alt: string = '';
+
+  public hasLoaded: boolean = false;
 
 
-ngOnInit(): void {
+  ngOnInit(): void {
 
-  if ( !this.url ) throw new Error(' URL property is required ');
+    if ( !this.url ) throw new Error(' URL property is required ');
+  }
+
+
+  onLoad() {
+    console.log('image loaded');
+    this.hasLoaded = true;
+
+  }
+
 }
-
-
- }

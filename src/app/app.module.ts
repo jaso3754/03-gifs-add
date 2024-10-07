@@ -8,7 +8,8 @@ import { SharedModule } from './shared/shared.module';
 
 
 import { AppComponent } from './app.component';
-import { AssetsComponent } from './src/assets/assets.component';
+
+
 
 // import { AppRoutingModule } from './app-routing.module';
 
@@ -18,7 +19,7 @@ import { AssetsComponent } from './src/assets/assets.component';
 @NgModule({
   declarations: [
     AppComponent,
-    AssetsComponent
+
   ],
   imports: [
     BrowserModule,
