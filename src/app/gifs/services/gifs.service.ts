@@ -1,51 +1,78 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { log } from 'console';
+import { Gif, SearchResponse } from '../interfaces/gifs.interfaces';
+import { Locals } from 'express';
 
-@Injectable({providedIn: 'root'})
-export class GifsService {
+@Injectable({ providedIn: 'root' })
+export class GifsService implements OnInit {
 
+  public gifList: Gif[] = [];
 
-private _tagsHistory: string[] = [];
-private apiKey:       string = 'FJTf1xHmJ1nOcuF3tbUSa7FXKDn6205R';
-private serviceUrl:   string = 'https://api.giphy.com/v1/gifs'
+  private _tagsHistory: string[] = [];
+  private apiKey:       string = 'QUEiqa73SilumZ8X2Jbl0YOi4Q4S1Rny';
+  private serviceUrl:   string = 'https://api.giphy.com/v1/gifs';
 
-  constructor( private http: HttpClient) { }
+  constructor( private http: HttpClient) {
+  
+    console.log('Gifs service ready');
+  }
 
-  get tagsHistory () {
+  ngOnInit(): void {
+    this.loadLocalStorage();
+  }
+
+  get tagsHistory() {
     return [...this._tagsHistory];
   }
 
-private organizeHistory (tag: string ) {
-  tag = tag.toLowerCase();
+  private organizeHistory(tag: string) {
+    tag = tag.toLowerCase();
 
-  if ( this._tagsHistory.includes (tag) ) {
-    this._tagsHistory = this._tagsHistory.filter ( (oldTag) => oldTag !== tag)
+    if (this._tagsHistory.includes(tag) ) {
+      this._tagsHistory = this._tagsHistory.filter( (oldTag) => oldTag !== tag)
+    }
+
+    this._tagsHistory.unshift(tag);
+    this._tagsHistory = this.tagsHistory.splice(0, 10);
+    this.saveLocalStorage();
   }
-  this._tagsHistory.unshift( tag );
-  this._tagsHistory = this.tagsHistory.splice(0,10);
-}
 
-    searchTag ( tag:string ): void {
+  private saveLocalStorage(): void {
+    localStorage.setItem('history', JSON.stringify(this._tagsHistory));
 
-    if (tag.length === 0 ) return;
-    this.organizeHistory( tag );
-
-    const params = new HttpParams ()
-    .set( 'api_key', this.apiKey )
-    .set( 'limit',  '10' )
-    .set( 'q',  tag )
-
-    this.http.get(`${ this.serviceUrl }/search` , { params })
-      .subscribe( resp => {
+  }
 
 
-        console.log(resp);
+  private loadLocalStorage( ):void {
+    if(!localStorage.getItem('history')) return;
+
+    this._tagsHistory = JSON.parse( localStorage.getItem('history')! );
+
+   if ( this._tagsHistory.length === 0 ) return;
+    this.searchTag( this._tagsHistory[0] );
+  }
+
+
+
+  searchTag(tag: string): void {
+
+    if (tag.length === 0) return;
+    this.organizeHistory(tag);
+
+    const params = new HttpParams()
+      .set('api_key', this.apiKey)
+      .set('limit', '10')
+      .set('q', tag)
+
+    this.http.get<SearchResponse>(`${this.serviceUrl}/search`, { params })
+      .subscribe(resp => {
+
+
+        this.gifList = resp.data;
+        // console.log({ gifs: this.gifList});
 
       });
 
-
   }
-
 
 }

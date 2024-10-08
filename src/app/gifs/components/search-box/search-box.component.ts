@@ -12,7 +12,7 @@ import { GifsService } from '../../services/gifs.service';
   <input type="text"
   class="form-control"
   placeholder="Buscar gifs...."
-  (keyup.enter)="searchTag (  )"
+  (keyup.enter)="searchTag ( )"
   #txtTagInput
   >
 
@@ -21,18 +21,18 @@ import { GifsService } from '../../services/gifs.service';
 
 export class SearchBoxComponent {
 
-@ViewChild('txtTagInput')
-public tagInput!: ElementRef<HTMLInputElement>;
+  @ViewChild('txtTagInput')
+  public tagInput!: ElementRef<HTMLInputElement>;
 
 
-  constructor( private gifsService: GifsService) { }
+  constructor(private gifsService: GifsService) { }
 
- // searchTag ( newTag:string ) {
-  searchTag ( ) {
+  // searchTag ( newTag:string ) {
+  searchTag() {
 
     const newTag = this.tagInput.nativeElement.value;
 
-    this.gifsService.searchTag ( newTag );
+    this.gifsService.searchTag(newTag);
 
     this.tagInput.nativeElement.value = '';
 
