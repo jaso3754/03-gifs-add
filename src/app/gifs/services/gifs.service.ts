@@ -13,7 +13,7 @@ export class GifsService implements OnInit {
   private serviceUrl:   string = 'https://api.giphy.com/v1/gifs';
 
   constructor( private http: HttpClient) {
-
+  
     console.log('Gifs service ready');
   }
 

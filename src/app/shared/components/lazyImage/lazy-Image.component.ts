@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { setTimeout } from 'node:timers/promises';
 
 
 @Component({
@@ -26,8 +27,9 @@ export class LazyImageComponent implements OnInit {
 
 
   onLoad() {
-    console.log('image loaded');
-    this.hasLoaded = true;
+    setTimeout(() => {
+      this.hasLoaded = true;
+    }, 1000);
 
   }
 
